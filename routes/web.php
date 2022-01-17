@@ -1,6 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+
+Route::namespace("Admin")
+->middleware("auth")
+->prefix("admin")
+->name("admin.")
+->group(function(){
+    Route::get('/', 'HomeController@index')->name('home');
+
+});
+
+Route::get("{any?}",function(){
+    return view("guests.home");
+})->where("any",".*");
