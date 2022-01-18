@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/vue.js') }}" defer></script>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         @yield('script')
 
@@ -15,11 +16,9 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
-                height: 100vh;
+              
                 margin: 0;
             }
 
@@ -71,7 +70,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/admin') }}">Home</a>
+                        <a href="{{ route('/admin') }}">Home</a>
                       
 
                     @else
@@ -83,11 +82,12 @@
                     @endauth
                 </div>
             @endif
+        </div>
 
             <div class="content">
                @yield('content')
 
             </div>
-        </div>
+       
     </body>
 </html>
