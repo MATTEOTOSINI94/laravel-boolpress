@@ -41,9 +41,14 @@
         <main>
             <div style="width: calc(100vw - 218px);" class="box-nav">
                 @if (Route::has('login'))
-                <div class="nav-link-content">
+                <div class="nav-link-content d-flex justify-content-end">
                     @auth
                         <a href="{{ route("admin.post.index") }}">Home</a>
+                        
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                          @csrf
+                          <button style="background: transparent" class="border-0" type="submit"><a>LOGOUT</a></button>
+                         </form>
                     
     
                     @else
@@ -72,3 +77,6 @@
     </div>
 </body>
 </html>
+
+
+

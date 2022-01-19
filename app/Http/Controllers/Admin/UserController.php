@@ -67,6 +67,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
+
+
     {
         $user = User::findOrFail($id);
         return view("admin.user.edit",compact("user"));
@@ -81,6 +83,12 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'role'=>'in:admin,user|required'
+            
+        ]);
        $data = $request->all();
        $user->update($data);
 

@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="container pt-3">
-        <div class="row">
+        <div class="row pt-5">
 
             @foreach ($posts as $post)
-            <div class="col-5 border ">
+            <div class="col-4 border ">
                 <img class="card-img-top" src="{{$post->coverImg}}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">{{$post->title}}</h5>
