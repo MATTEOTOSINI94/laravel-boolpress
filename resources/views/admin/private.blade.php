@@ -24,14 +24,21 @@
             <a href="{{route("admin.post.create")}}" class="nav-link ">Crea Post</a>
           </li>
           <li>
-            <a href="/" class="nav-link ">General</a>
+            <a href="/" class="nav-link ">Blog</a>
           </li>
+
+          @if (Auth::user()->role === 'admin')
+          <li>
+            <a href="{{route("admin.user.index")}}" class="nav-link ">Utenti</a>
+          </li> 
+          @endif
+          
     
         </ul>
       </div>
 
       <div class="d-flex">
-        <header>
+        <main>
             <div style="width: calc(100vw - 218px);" class="box-nav">
                 @if (Route::has('login'))
                 <div class="nav-link-content">
@@ -59,7 +66,7 @@
 
          
       </div>
-        </header>
+    </main>
      </div>
       
     </div>

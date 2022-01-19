@@ -1,21 +1,30 @@
 @extends('admin.private')
 
 @section('content')
+
+@if (count($errors->all()) !== 0)
+<div class="alert alert-danger" role="alert">
+  @foreach ($errors->all() as $message)
+    <strong>{{$message}}</strong><br>
+  @endforeach
+  </div>
+  @endif
+  
 <div  class="d-flex justify-content-center pt-5">
 <form style="width: 500px" action="{{route("admin.post.update", $postMod->id)}}" method="POST">
     @csrf
     @method("PUT")
     <div class="form-group">
       <label for="titolo">Titolo</label>
-      <input type="text" class="form-control" id="titolo" name="title" >
+      <input type="text" class="form-control" id="titolo" name="title" value="{{$postMod->title}}" >
     </div>
     <div class="form-group">
       <label for="descrizione">Descrizione</label>
-      <input type="content" class="form-control" id="descrizione" name="content" >
+      <input type="content" class="form-control" id="descrizione" name="content" value="{{$postMod->content}}" >
     </div>
     <div class="form-group">
         <label for="cover">Immagine</label>
-        <input type="coverImg" class="form-control" id="cover" name="coverImg" >
+        <input type="coverImg" class="form-control" id="cover" name="coverImg">
       </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

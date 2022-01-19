@@ -1,7 +1,17 @@
 @extends('admin.private')
 
 @section('content')
+
+@if (count($errors->all()) !== 0)
+<div class="alert alert-danger" role="alert">
+  @foreach ($errors->all() as $message)
+    <strong>{{$message}}</strong><br>
+  @endforeach
+  </div>
+  @endif
+
 <div class="d-flex justify-content-center pt-5"  class="pt-5">
+  
 <form style="width: 500px" action="{{route("admin.post.store")}}" method="POST">
     @csrf
     <div class="form-group">

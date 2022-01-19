@@ -46,6 +46,12 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
+        $validated = $request->validate([
+            'title' => 'required|unique:posts|max:255',
+            'content' => 'required|min:20',
+            'coverImg'=>'required|url',
+        ]);
+
         // da completare la validazione
         $data =$request->all();
         $newPost = new Post();
@@ -91,6 +97,12 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $validated = $request->validate([
+            'title' => 'required|unique:posts|max:255',
+            'content' => 'required|min:20',
+            'coverImg'=>'required|url',
+        ]);
+
         $data = $request->all();
         $post->update($data);
 
