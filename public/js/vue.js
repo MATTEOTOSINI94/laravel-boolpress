@@ -158,6 +158,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Card",
   props: {
@@ -1346,6 +1347,16 @@ var render = function () {
       _c("div", { staticClass: "card-body" }, [
         _c("p", { staticClass: "card-text" }, [
           _vm._v(_vm._s(_vm.dati.content)),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("strong", [_vm._v("Categoria: ")]),
+          _c("small", [_vm._v(_vm._s(_vm.dati.categorie.title))]),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("strong", [_vm._v("Autore: ")]),
+          _c("small", [_vm._v(_vm._s(_vm.dati.user.name))]),
         ]),
       ]),
     ]

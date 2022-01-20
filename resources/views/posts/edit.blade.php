@@ -26,6 +26,17 @@
         <label for="cover">Immagine</label>
         <input type="coverImg" class="form-control" id="cover" name="coverImg">
       </div>
+      
+
+      <div class="form-group">
+        <label for="cateogries">Categoria</label>
+        <select name="categorie_id" class="form-control">
+          @foreach ($categoria as $catego)
+          <option value="{{$catego->id}}" @if($catego->id===$postMod->categorie_id) selcted @endif>{{$catego->title}}</option>
+          @endforeach
+          
+        </select>
+      </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

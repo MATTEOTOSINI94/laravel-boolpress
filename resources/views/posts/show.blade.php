@@ -1,12 +1,15 @@
 @extends('admin.private')
 
-@section('content')
-<div class="d-flex justify-content-center">
-<div class="card" style="width: 800px">
+@section('content') 
+<div  class="d-flex justify-content-center pt-5">
+<div class="card" style="width: 500px">
     <img class="card-img-top" src="{{$post->coverImg}}" alt="Card image cap">
     <div class="card-body">
         <h1>{{$post->title}}</h1>
       <p class="card-text">{{$post->content}}</p>
+      <div>
+       <span>Autore - <strong>{{$post->user->name}}</strong></span>
+      </div>
       <div class="d-flex justify-content-center">
         <a href="{{route("admin.post.edit",$post->id)}}" class="btn btn-secondary">Modifica</a>
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Post;
+use App\Categorie;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -22,7 +24,7 @@ class PostController extends Controller
 
     public function dati(){
 
-        $postList = Post::all();
+        $postList = Post::with("categorie","user")->get();
 
         return $postList;
     }
@@ -34,7 +36,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("posts.create");
+
+        $categoria = Categorie::all();
+        return view("posts.create",compact("categoria"));
     }
 
     /**
@@ -47,18 +51,20 @@ class PostController extends Controller
     {
 
         $validated = $request->validate([
-            'title' => 'required|unique:posts|max:255',
+            'title' => 'required|max:255',
             'content' => 'required|min:20',
             'coverImg'=>'required|url',
         ]);
 
         // da completare la validazione
         $data =$request->all();
+        
         $newPost = new Post();
 
         $newPost->title = $data["title"];
         $newPost->content=$data["content"];
         $newPost->coverImg=$data["coverImg"];
+        $newPost->user_id= Auth::user()->id;
         $newPost->save();
 
         return redirect()->route("admin.post.index");
@@ -73,6 +79,8 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
+     
+
         return view("posts.show",compact("post"));
     }
 
@@ -85,7 +93,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $postMod = Post::findOrFail($id);
-        return view("posts.edit",compact("postMod"));
+        $categoria = Categorie::all();
+      
+        return view("posts.edit",["postMod"=>$postMod,"categoria"=>$categoria]);
     }
 
     /**
@@ -98,7 +108,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $validated = $request->validate([
-            'title' => 'required|unique:posts|max:255',
+            'title' => 'required|max:255',
             'content' => 'required|min:20',
             'coverImg'=>'required|url',
         ]);
