@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
       <label for="descrizione">Descrizione</label>
-      <input type="content" class="form-control" id="descrizione" name="content" value="{{$postMod->content}}" >
+      <textarea type="content" class="form-control" id="descrizione" name="content" value="">{{$postMod->content}}</textarea>
     </div>
     <div class="form-group">
         <label for="cover">Immagine</label>

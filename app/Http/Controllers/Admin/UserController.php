@@ -19,7 +19,7 @@ class UserController extends Controller
         
         $role = Auth::user()->role;
         if($role === "user"){
-            abort(403, 'Unauthorized action.');
+            abort(403, 'Pemesso Negato.');
         }
         else{  $users = User::all();
             return view("admin.user.users",compact("users"));}
@@ -86,9 +86,10 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
-            'role'=>'in:admin,user|required'
-            
+            'role'=>'in:admin,user|required'  
         ]);
+
+        
        $data = $request->all();
        $user->update($data);
 
