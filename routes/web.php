@@ -27,6 +27,7 @@ Route::namespace("Admin")
     Route::get('/', 'HomeController@index')->name("home");
     Route::resource("post","PostController");
     Route::resource("user","UserController");
+    Route::resource("categories","CategorieController");
 
 });
 

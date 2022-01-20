@@ -18,18 +18,21 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
-            <a href="{{route("admin.post.index")}}" class="nav-link " aria-current="page">Home</a>
+            <a href="{{route("admin.post.index")}}" class="nav-link text-secondary " aria-current="page">Home</a>
           </li>
           <li>
-            <a href="{{route("admin.post.create")}}" class="nav-link ">Crea Post</a>
+            <a href="{{route("admin.post.create")}}" class="nav-link text-secondary">Crea Post</a>
           </li>
           <li>
-            <a href="/" class="nav-link ">Blog</a>
+            <a href="/" class="nav-link text-secondary ">Blog</a>
           </li>
 
           @if (Auth::user()->role === 'admin')
           <li>
-            <a href="{{route("admin.user.index")}}" class="nav-link ">Utenti</a>
+            <a href="{{route("admin.user.index")}}" class="nav-link text-secondary">Utenti</a>
+          </li> 
+          <li>
+            <a href="{{route("admin.categories.create")}}" class="nav-link text-secondary ">Crea Cateogoria</a>
           </li> 
           @endif
           

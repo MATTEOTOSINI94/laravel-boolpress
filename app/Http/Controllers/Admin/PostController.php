@@ -18,8 +18,9 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+        $categoria = Categorie::all();
         
-        return view("posts.posts", compact("posts"));
+        return view("posts.posts", compact("posts","categoria"));
     }
 
     public function dati(){
