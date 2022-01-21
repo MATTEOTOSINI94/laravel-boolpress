@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Post;
+use App\Tag;
 use App\Categorie;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -37,9 +38,9 @@ class PostController extends Controller
      */
     public function create()
     {
-
+        $tags = Tag::all();
         $categoria = Categorie::all();
-        return view("posts.create",compact("categoria"));
+        return view("posts.create",compact("categoria","tags"));
     }
 
     /**
@@ -59,14 +60,20 @@ class PostController extends Controller
 
         // da completare la validazione
         $data =$request->all();
+
+        $tags = $request->only("tags");
         
         $newPost = new Post();
 
         $newPost->title = $data["title"];
         $newPost->content=$data["content"];
         $newPost->coverImg=$data["coverImg"];
+      
         $newPost->user_id= Auth::user()->id;
         $newPost->save();
+        foreach ($tags as $key => $tag) {
+            $newPost->tag()->attach($tag);
+        }
 
         return redirect()->route("admin.post.index");
     }
@@ -79,6 +86,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
+        
         $post = Post::findOrFail($id);
      
 
@@ -93,10 +101,11 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $tags = Tag::all();
         $postMod = Post::findOrFail($id);
         $categoria = Categorie::all();
       
-        return view("posts.edit",["postMod"=>$postMod,"categoria"=>$categoria]);
+        return view("posts.edit",["postMod"=>$postMod,"categoria"=>$categoria,"tags"=>$tags]);
     }
 
     /**
@@ -114,8 +123,17 @@ class PostController extends Controller
             'coverImg'=>'required|url',
         ]);
 
+        
+
         $data = $request->all();
+        $tags = $request->only("tags");
+
+        // dump($tags["tags"]);
+        // exit();
+       
         $post->update($data);
+
+        $post->tag()->sync($tags["tags"]);
 
         return redirect()->route("admin.post.show", $post->id);
     }

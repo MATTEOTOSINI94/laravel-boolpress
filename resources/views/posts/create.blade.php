@@ -26,12 +26,20 @@
         <label for="cover">Immagine</label>
         <input type="coverImg" class="form-control" id="cover" name="coverImg" >
       </div>
-
       <div class="form-group">
         <label for="cateogries">Categoria</label>
         <select name="categorie_id" class="form-control">
           @foreach ($categoria as $catego)
           <option value="{{$catego->id}}">{{$catego->title}}</option>
+          @endforeach
+          
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="tags">Tag</label>
+        <select name="tags[]" class="form-control" multiple>
+          @foreach ($tags as $tag)
+          <option value="{{$tag->id}}">{{$tag->title}}</option>
           @endforeach
           
         </select>

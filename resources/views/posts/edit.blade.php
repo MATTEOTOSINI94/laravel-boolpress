@@ -37,6 +37,16 @@
           
         </select>
       </div>
+      @dump($postMod->tag)
+      <div class="form-group">
+        <label for="tags">Tag</label>
+        <select name="tags[]" class="form-control" multiple >
+          @foreach ($tags as $tag)
+          <option value="{{$tag->id}}" {{$postMod->tag->contains($tag) ? "selected": "" }}>{{$tag->title}}</option>
+          @endforeach
+          
+        </select>
+      </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

@@ -10,9 +10,16 @@
       <div>
        <span>Autore - <strong>{{$post->user->name}}</strong></span>
       </div>
+      <div>
+        @foreach ($post->tag as $tag)
+        <span class="badge badge-primary">
+          {{$tag->title}}
+        </span>
+        @endforeach
+      </div>
       <div class="d-flex justify-content-center">
         <a href="{{route("admin.post.edit",$post->id)}}" class="btn btn-secondary">Modifica</a>
-
+        
         <form action="{{route("admin.post.destroy",$post->id)}}" method="POST">
           @csrf
           @method("delete")
