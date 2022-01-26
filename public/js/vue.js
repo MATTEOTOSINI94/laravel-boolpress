@@ -111,6 +111,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
@@ -119,15 +130,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      posts: []
+      posts: [],
+      lastPage: null
     };
   },
-  mounted: function mounted() {
-    var _this = this;
+  methods: {
+    getPage: function getPage() {
+      var _this = this;
 
-    window.axios.get("/api/posts").then(function (resp) {
-      _this.posts = resp.data;
-    });
+      var pagina = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      window.axios.get("/api/posts?page=" + pagina).then(function (resp) {
+        _this.posts = resp.data.data;
+        _this.lastPage = resp.data.last_page;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getPage();
   }
 });
 
@@ -162,7 +181,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Card",
   props: {
-    dati: Array
+    dati: Object
   }
 });
 
@@ -1308,6 +1327,32 @@ var render = function () {
         }),
         1
       ),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-flex justify-content-center" }, [
+        _c("nav", [
+          _c(
+            "ul",
+            { staticClass: "pagination" },
+            _vm._l(_vm.lastPage, function (page) {
+              return _c("li", { key: page }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "page-link",
+                    on: {
+                      click: function ($event) {
+                        return _vm.getPage(page)
+                      },
+                    },
+                  },
+                  [_vm._v(_vm._s(page))]
+                ),
+              ])
+            }),
+            0
+          ),
+        ]),
+      ]),
     ]),
   ])
 }
@@ -1345,9 +1390,14 @@ var render = function () {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
-        _c("p", { staticClass: "card-text" }, [
-          _vm._v(_vm._s(_vm.dati.content)),
-        ]),
+        _c(
+          "p",
+          {
+            staticClass: "card-text",
+            staticStyle: { "overflow-wrap": "break-word" },
+          },
+          [_vm._v(_vm._s(_vm.dati.content))]
+        ),
         _vm._v(" "),
         _c("p", [
           _c("strong", [_vm._v("Categoria: ")]),

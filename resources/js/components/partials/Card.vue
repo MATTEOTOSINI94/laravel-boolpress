@@ -5,7 +5,7 @@
                     <h1>{{dati.title}}</h1>
                     <img class="card-img-top" :src="dati.coverImg" alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-text">{{dati.content}}</p>
+                        <p style=" overflow-wrap: break-word" class="card-text">{{dati.content}}</p>
                        <p><strong>Categoria: </strong><small>{{dati.categorie.title}}</small></p>
                        <p><strong>Autore: </strong><small>{{dati.user.name}}</small></p>
                     </div>
@@ -20,7 +20,7 @@
         name:"Card",
 
         props:{
-            dati:Array
+            dati:Object
         }
         
         }

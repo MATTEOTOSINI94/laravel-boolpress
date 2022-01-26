@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Post;
 use App\Tag;
 use App\Categorie;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -18,15 +19,15 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(2);
         $categoria = Categorie::all();
         
         return view("posts.posts", compact("posts","categoria"));
     }
 
-    public function dati(){
+    public function dati(Request $request){
 
-        $postList = Post::with("categorie","user")->get();
+        $postList = Post::with("categorie","user",)->paginate(2);
 
         return $postList;
     }
@@ -61,7 +62,14 @@ class PostController extends Controller
         // da completare la validazione
         $data =$request->all();
 
+        $slug = Str::slug($data["title"]);
+        dd($slug);
+
         $tags = $request->only("tags");
+        
+      
+        
+       
         
         $newPost = new Post();
 
@@ -88,7 +96,7 @@ class PostController extends Controller
     {
         
         $post = Post::findOrFail($id);
-     
+        
 
         return view("posts.show",compact("post"));
     }

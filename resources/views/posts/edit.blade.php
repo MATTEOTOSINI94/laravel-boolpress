@@ -37,7 +37,7 @@
           
         </select>
       </div>
-      @dump($postMod->tag)
+   
       <div class="form-group">
         <label for="tags">Tag</label>
         <select name="tags[]" class="form-control" multiple >

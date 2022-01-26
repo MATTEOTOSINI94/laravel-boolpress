@@ -28,6 +28,7 @@ Route::namespace("Admin")
     Route::resource("post","PostController");
     Route::resource("user","UserController");
     Route::resource("categories","CategorieController");
+    Route::resource("comment","CommentController");
 
 });
 
