@@ -32,6 +32,13 @@ class PostController extends Controller
         return $postList;
     }
 
+    public function showapi($id){
+        $post = Post::findOrFail($id);
+
+        return response()->json($post);
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
