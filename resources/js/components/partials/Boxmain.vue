@@ -2,7 +2,8 @@
   <div :style=" `background-image: url('${img}')`" class="box-img">
       <div class="box-content text-center">
           <h1>{{ title }}</h1>
-          <h5>{{ subTitle }}</h5>
+          <h4>{{ subTitle }}</h4>
+          <slot></slot>
       </div>
       
   </div>

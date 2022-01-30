@@ -12,7 +12,11 @@
 import Navbar from "./partials/Navbar";
     export default {
         name:"App",
-        components:{ Navbar}
+        components:{ Navbar},
+
+        mounted(){
+          
+        }
 
     }
 </script>

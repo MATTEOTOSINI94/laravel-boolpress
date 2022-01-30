@@ -22,22 +22,10 @@ class PostController extends Controller
         $posts = Post::paginate(2);
         $categoria = Categorie::all();
         
+        
         return view("posts.posts", compact("posts","categoria"));
     }
 
-    public function dati(Request $request){
-
-        $postList = Post::with("categorie","user",)->paginate(2);
-
-        return $postList;
-    }
-
-    public function showapi($id){
-        $post = Post::findOrFail($id);
-
-        return response()->json($post);
-
-    }
 
     /**
      * Show the form for creating a new resource.
